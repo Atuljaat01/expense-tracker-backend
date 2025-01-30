@@ -145,8 +145,17 @@ const updateUserProfile = asynchandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, 'User profile updated successfully'));
 });
+const getUserProfile = asynchandler(async (req, res) => {
+    const user = await User.findById(req.user.userId).select('-password -refreshToken');
+    if(!user){
+        throw new ApiError(400, 'User not found');
+    }
+    res
+    .status(200)
+    .json(new ApiResponse(200, user, 'User profile retrieved successfully'));
+});
 
 
-export { signUp, signIn, signOut, changePassword, updateUserProfile
+export { signUp, signIn, signOut, changePassword, updateUserProfile, getUserProfile
  };
 
