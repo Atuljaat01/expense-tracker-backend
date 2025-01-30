@@ -1,0 +1,2 @@
+# expense-tracker-backend
+The Expense Tracker Backend is a RESTful API built with Node.js, Express, and MongoDB. It provides a robust backend service for managing user authentication, expense tracking, and budget management. This API allows users to sign up, sign in, manage their profiles, and track their expenses efficiently.
