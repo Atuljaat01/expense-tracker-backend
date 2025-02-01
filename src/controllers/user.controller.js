@@ -154,8 +154,31 @@ const getUserProfile = asynchandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, 'User profile retrieved successfully'));
 });
+const deleteUser = asynchandler(async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.user.userId);
+    if(!user){
+        throw new ApiError(400, 'User not found');
+    }
+    res
+    .status(200)
+    .json(new ApiResponse(200, null, 'User deleted successfully'));
+    } catch (error) {
+        throw new ApiError(500, "something went wrong", error);
+    }
+    
+});
+const getUserSubscription = asynchandler(async (req, res) => {
+    const user = await User.findById(req.user.userId).select('subscriptionPlan subscriptionExpiresAt');
+    if(!user){
+        throw new ApiError(400, 'User not found');
+    }
+    res
+    .status(200)
+    .json(new ApiResponse(200, user, 'User subscription retrieved successfully'));
+});
 
 
-export { signUp, signIn, signOut, changePassword, updateUserProfile, getUserProfile
+export { signUp, signIn, signOut, changePassword, updateUserProfile, getUserProfile, deleteUser, getUserSubscription
  };
 
