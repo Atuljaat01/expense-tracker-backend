@@ -1,4 +1,4 @@
-import mongoose, { userSchema} from "mongoose";
+import mongoose, { Schema} from "mongoose";
 
 const expenseSchema = new mongoose.Schema({
     title: {
@@ -22,18 +22,11 @@ const expenseSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    isSubscribed: {
-        type: Boolean,
-        default: false,
-    },
-    subscriptionType: {
-        type: String,
-        enum: ["free", "basic", "premium"],
-        default: "free",
-    },
-    subscriptionExpiresAt: {
-        type: Date,
-    },
-});
+    
+},
+{
+    timestamps: true,
+}
+);
 
 export const Expense = mongoose.model("Expense", expenseSchema);

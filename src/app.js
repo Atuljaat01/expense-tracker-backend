@@ -23,6 +23,11 @@ import userRouter from './routes/user.route.js';
 
 app.use('/api/v1/users', userRouter);
 
+// routes for expenses
+import expenseRouter from './routes/expense.route.js';
+app.use('/api/v1', expenseRouter);
+
+
 
 
 
