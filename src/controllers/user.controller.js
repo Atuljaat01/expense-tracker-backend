@@ -177,8 +177,22 @@ const getUserSubscription = asynchandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, 'User subscription retrieved successfully'));
 });
+    const setMonthlyExpenseLimit = asynchandler(async (req, res) => {
+        const { monthlyExpenseLimit } = req.body;
+        if(!req.user.isSubscribed){
+            throw new ApiError(400, 'Please subscribe to set monthly expense limit');
+        }else{
+        const user = await User.findByIdAndUpdate(req.user.userId, { monthlyExpenseLimit }, { new: true }).select('-password -refreshToken');
+        if(!user){
+            throw new ApiError(400, 'User not found');
+        }
+        res
+        .status(200)
+        .json(new ApiResponse(200, user, 'Monthly expense limit set successfully'));}
+    });
 
 
-export { signUp, signIn, signOut, changePassword, updateUserProfile, getUserProfile, deleteUser, getUserSubscription
+
+export { signUp, signIn, signOut, changePassword, updateUserProfile, getUserProfile, deleteUser, getUserSubscription, setMonthlyExpenseLimit
  };
 

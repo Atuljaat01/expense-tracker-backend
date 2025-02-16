@@ -26,7 +26,6 @@ const createExpense = asynchandler(async (req, res) => {
 });
 
 const getExpense = asynchandler(async (req, res) => {
-    const { ObjectId } = mongoose.Types;
     const { category, startDate, endDate, minAmount, maxAmount } = req.body;
     if(minAmount && isNaN(minAmount)){
         throw new ApiError(400, 'Min amount must be a number');

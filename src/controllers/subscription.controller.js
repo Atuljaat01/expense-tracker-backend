@@ -36,6 +36,7 @@ if(plan === 'premium' && user.subscriptionPlan === 'premium'){
 user.isSubscribed = true;
 user.subscriptionPlan = plan;
 user.subscriptionExpiresAt = expiration;
+user.duration = duration;
 await user.save()
 res
 .status(200)
@@ -44,8 +45,32 @@ res
     throw new ApiError(500,"something went wrong", error);
 }});
 
+const unsubscibe =  asynchandler(async(req,res) => {
+    try{
+       const user =  await User.findById(req.user.userId).select('-password')
+         if(!user){
+             throw new ApiError(400, 'User not found')
+         }
+       const subscribed = user.isSubscribed
+         if(!subscribed){
+              throw new ApiError(400, 'You are not subscribed')
+         }
+            user.isSubscribed = false
+            user.subscriptionPlan = "free"
+            user.subscriptionExpiresAt = null
+            user.duration = null
+            await user.save()
+
+            res
+            .status(200)
+            .json(new ApiResponse(200, null, 'Unsubscribed successfully'))
+
+    }catch{
+        throw new ApiError(500, "something went wrong", error)
+    }
+});
 
 
 
 
-export { subscribe }
+export { subscribe, unsubscibe };

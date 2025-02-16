@@ -32,6 +32,15 @@ const userSchema = new Schema({
     subscriptionExpiresAt: {
         type: Date,
     },
+    duration:{
+        type: String,
+        enum: ["monthly", "yearly"],
+    },
+    
+    monthlyExpenseLimit: {
+        type: Number,
+        default: 0,
+    },
 });
 
 userSchema.pre("save", async function (next) {

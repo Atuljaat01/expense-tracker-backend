@@ -1,4 +1,4 @@
-import { signUp, signIn, changePassword, updateUserProfile, signOut, getUserProfile, deleteUser, getUserSubscription } from "../controllers/user.controller.js";
+import { signUp, signIn, changePassword, updateUserProfile, signOut, getUserProfile, deleteUser, getUserSubscription,setMonthlyExpenseLimit  } from "../controllers/user.controller.js";
 import express, { Router} from "express";
 import verifyJwt from "../middleware/auth.middleware.js";
 
@@ -12,6 +12,7 @@ router.route("/update-profile").put(verifyJwt, updateUserProfile);
 router.route("/profile").get(verifyJwt, getUserProfile);
 router.route("/delete-user").delete(verifyJwt, deleteUser);
 router.route("/subscription").get(verifyJwt, getUserSubscription);
+router.route("/set-budget").put(verifyJwt, setMonthlyExpenseLimit);
 
 
 

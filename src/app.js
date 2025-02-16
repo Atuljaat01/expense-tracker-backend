@@ -17,6 +17,9 @@ app.use(cookieParser());
 
 // importing routes
 import userRouter from './routes/user.route.js';
+import expenseRouter from './routes/expense.route.js';
+import subscriptionRouter from './routes/subscription.route.js';
+
 
 
 // using routes
@@ -24,8 +27,13 @@ import userRouter from './routes/user.route.js';
 app.use('/api/v1/users', userRouter);
 
 // routes for expenses
-import expenseRouter from './routes/expense.route.js';
+
 app.use('/api/v1', expenseRouter);
+
+// routes for subscription
+
+app.use('/api/v1/subscription', subscriptionRouter);
+
 
 
 

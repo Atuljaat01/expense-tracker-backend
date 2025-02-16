@@ -6,6 +6,9 @@ dotenv.config({
     path: '.env'
 })
 
+// run jobs
+import './jobs/subscriptionScheduler.js'
+
 
 
 connectDB()
