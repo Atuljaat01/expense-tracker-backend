@@ -57,6 +57,7 @@ res.status(200).json(new ApiResponse(200, { total: expenses[0]?.total || 0, rema
 
 
 
+
 export default monthlyReport;
 
 
