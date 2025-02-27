@@ -29,7 +29,6 @@ const monthlyReport = asynchandler(async (req, res) => {
             },
         ]);
         
-console.log(expenses    );
 const user = await User.findById(req.user.userId).select('-password');
 if (!user) {
     throw new ApiError(400, 'User not found'); // Handle case where user doesn't exist
